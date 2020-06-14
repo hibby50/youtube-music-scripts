@@ -18,7 +18,7 @@ ytmusic = YTMusic('headers_auth.json')
 playlist_files = subprocess.check_output('find %s -name "*m3u*"' % config['playlists']['local'], shell=True)
 playlist_files = playlist_files.decode("utf-8").splitlines()
 
-remote_songs = ytmusic.get_library_upload_songs(300)
+remote_songs = ytmusic.get_library_upload_songs(99999)
 remote_playlists = ytmusic.get_library_playlists()
 print(len(remote_songs))
 playlist_content = {}
@@ -45,6 +45,8 @@ for playlist in playlist_content:
     print("removing %s duplicates from %s" % (len(duplicates), playlist))
     if len(duplicates) > 0:
        print(ytmusic.remove_playlist_items(playlist, duplicates))
+    #remove duplicates from teh final playlist
+    upload = list(dict.fromkeys(upload))
     print("adding %s songs to %s" % (len(upload), playlist))
     print(ytmusic.add_playlist_items(playlist, upload))
 #        if song["title"] in playlist_content[playlist]:
