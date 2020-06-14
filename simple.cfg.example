@@ -1,0 +1,8 @@
+[auth]
+headers_file = ./headers_auth.json
+
+[playlists]
+local = /storage/media/playlists
+
+[music]
+local = /storage/media/music
